@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= @title || "SacRuby.new Contact Book" %> </title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top"><%= yield :navbar %></nav>
+
+<section class="container main">
+
+<%= yield %>
+
+<hr>
+<footer><%= copyright(@company) %></footer>
+</section>
+
+<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+</body>
+</html>

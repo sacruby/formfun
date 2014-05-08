@@ -1,0 +1,69 @@
+<%= form_for(@person) do |f| %>
+  <% if @person.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@person.errors.count, "error") %> prohibited this person from being saved:</h2>
+
+      <ul>
+      <% @person.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+
+  <%= field_set_tag 'Phones' do %>
+    <%= f.fields_for :phones do |phone| %>
+      <div class="field">
+        <%= phone.label :number %><br>
+        <%= phone.text_field :number %>
+      </div>
+      <% if phone.object.persisted? %>
+        <div class="field">
+          Delete: <%= phone.check_box :_destroy %>
+        </div>
+      <% end %>
+      <hr>
+    <% end %>
+  <% end %>
+
+  <%= field_set_tag 'Addresses' do %>
+    <%= f.fields_for :addresses do |address| %>
+      <div class="field">
+        <%= address.label :street %><br>
+        <%= address.text_field :street %>
+      </div>
+      <div class="field">
+        <%= address.label :city %><br>
+        <%= address.text_field :city %>
+      </div>
+      <div class="field">
+        <%= address.label :state%><br>
+        <%= address.text_field :state%>
+      </div>
+      <div class="field">
+        <%= address.label :zip %><br>
+        <%= address.text_field :zip %>
+      </div>
+      <div class="field">
+        <%= address.label :location_type %><br>
+        <%= address.collection_select :location_type_id, LocationType.all, :id, :name, include_blank: true %>
+      </div>
+      <% if address.object.persisted? %>
+        <div class="field">
+          Delete: <%= address.check_box :_destroy %>
+        </div>
+      <% end %>
+      <hr>
+    <% end %>
+  <% end %>
+
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

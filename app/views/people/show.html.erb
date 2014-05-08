@@ -1,0 +1,26 @@
+<section class="container">
+<h2><%= @person.name %></h2>
+
+<p id="notice"><%= notice %></p>
+
+<table class="table table-striped">
+  <tbody>
+    <% @person.phones.each do |phone| %>
+      <tr>
+        <td>Number</td>
+        <td><%= phone.number %></td>
+      </tr>
+    <% end %>
+    <% @person.addresses.each do |address| %>
+      <tr>
+        <td><%= format_address_table_label(address) %></td>
+        <td><%= format_address(address) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Edit', edit_person_path(@person) %>
+</section>
+
+<% render "layouts/standard_navbar" %>
